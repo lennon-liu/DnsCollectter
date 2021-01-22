@@ -1,0 +1,30 @@
+Sun, 13 Dec 2020 21:21:55 base.py[line:166] INFO Scheduler started
+Sun, 13 Dec 2020 21:21:55 scheduler.py[line:111] INFO Schedule init success
+Sun, 13 Dec 2020 21:22:55 scheduler.py[line:128] INFO {"scan_conf": {"ips": ["1.32.208.0-1.32.215.255"], "rate": 2000, "iface": "ens33", "tmpexclude": [], "index": "aaaa", "source_port": 60000, "ports": ["443", "8443"], "es": "172.16.39.209"}, "taskname": "xxxx", "interval": {"seconds": 0, "hours": 0, "weeks": 0, "minutes": 5, "days": 0}, "taskid": "3e0c6770-5f35-4e2e-849c-ddc1270b299d"}
+Sun, 13 Dec 2020 21:22:55 scheduler.py[line:143] INFO xxxx add job
+Sun, 13 Dec 2020 21:22:55 scheduler.py[line:155] INFO xxxx-->>in mongo success
+Sun, 13 Dec 2020 21:22:56 base.py[line:881] INFO Added job "runjobs" to job store "default"
+Sun, 13 Dec 2020 21:22:56 base.py[line:123] INFO Running job "runjobs (trigger: interval[0:05:00], next run at: 2020-12-13 21:22:55 EST)" (scheduled at 2020-12-13 21:22:55.838076-05:00)
+Sun, 13 Dec 2020 21:22:56 scheduler.py[line:75] INFO 3e0c6770-5f35-4e2e-849c-ddc1270b299dsearch conf success
+Sun, 13 Dec 2020 21:22:56 scanner.py[line:33] INFO scanner -->>init
+Sun, 13 Dec 2020 21:22:56 scheduler.py[line:85] INFO 3e0c6770-5f35-4e2e-849c-ddc1270b299dcreate job success
+Sun, 13 Dec 2020 21:22:56 scanner.py[line:117] INFO start
+Sun, 13 Dec 2020 21:22:56 scanner.py[line:140] INFO port scanner start
+Sun, 13 Dec 2020 21:22:56 scanner.py[line:149] INFO masscan --excludefile=434056d6-2dea-4a64-aa9b-7c59f74f8bf1_ex_ip.tmp --source-port=60000 -i ens33 --rate=2000 -p 443,8443 -iL 4dd5e429-24bf-4ccd-848e-80fac19af385_ip.tmp
+Sun, 13 Dec 2020 21:22:56 scanner.py[line:150] INFO dns_output -e 172.16.39.209 -i ip2domain
+Sun, 13 Dec 2020 21:22:56 scanner.py[line:57] INFO <subprocess.Popen object at 0x7fbbaca024d0>
+Sun, 13 Dec 2020 21:22:57 base.py[line:131] ERROR Job "runjobs (trigger: interval[0:05:00], next run at: 2020-12-13 21:27:55 EST)" raised an exception
+Traceback (most recent call last):
+  File "/home/ml/python_project/venv/lib/python2.7/site-packages/apscheduler/executors/base.py", line 125, in run_job
+    retval = job.func(*job.args, **job.kwargs)
+  File "build/bdist.linux-x86_64/egg/DnsCollect/scheduler.py", line 86, in runjobs
+    myjob.sscan()
+  File "build/bdist.linux-x86_64/egg/DnsCollect/scanner.py", line 151, in sscan
+    self.call_subprocess([command, ["tprotocol_https"],dns_output])
+  File "build/bdist.linux-x86_64/egg/DnsCollect/scanner.py", line 54, in call_subprocess
+    subp = subprocess.Popen(commands[i], stdin=ps[-1].stdout, stdout=subprocess.PIPE)
+  File "/usr/lib64/python2.7/subprocess.py", line 711, in __init__
+    errread, errwrite)
+  File "/usr/lib64/python2.7/subprocess.py", line 1327, in _execute_child
+    raise child_exception
+OSError: [Errno 2] No such file or directory
